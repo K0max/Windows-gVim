@@ -1,12 +1,35 @@
-if has("gui_running")
-    au GUIEnter * simalt ~x " 窗口启动时自动最大化
-    set guioptions-=m " 隐藏菜单栏
-    set guioptions-=T " 隐藏工具栏
-    set guioptions-=L " 隐藏左侧滚动条
-    set guioptions-=r " 隐藏右侧滚动条
-    set guioptions-=b " 隐藏底部滚动条
-    set showtabline=0 " 隐藏Tab栏
-endif
+source $VIMRUNTIME/mswin.vim
+" 像Windows一样使用Ctrl-C,V等复制粘贴
+behave mswin
+" 解决Windows gVim的奇怪bug：在Insert模式中需要通过切换MS和搜狗输入法来启用中文
+" 详见https://github.com/rime/weasel/issues/232
+set iminsert=2
+
+"if has("gui_running")
+"    au GUIEnter * simalt ~x " 窗口启动时自动最大化
+"    set guioptions-=m " 隐藏菜单栏
+"    set guioptions-=T " 隐藏工具栏
+"    set guioptions-=L " 隐藏左侧滚动条
+"    set guioptions-=r " 隐藏右侧滚动条
+"    set guioptions-=b " 隐藏底部滚动条
+"    set showtabline=0 " 隐藏Tab栏
+"endif
+
+let mapleader = " "
+set timeoutlen=200
+
+"在插入模式下使用jj来退出
+inoremap jj <Esc>
+"更好地移动到行首行尾以及上下移动
+nnoremap H g0
+nnoremap L g$
+nnoremap j gj
+nnoremap k gk
+vnoremap H g0
+vnoremap L g$
+vnoremap j gj
+vnoremap k gk
+
 "vim-plug
 call plug#begin('~/.vim/plugged')
 
@@ -259,12 +282,10 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
 "------------------------------coc.nvim---------------------------------------------
 
 
 "vim基础设置-----------------------------------------------------------------------------
-
 syntax enable
 set sw=4
 set ts=4
@@ -286,7 +307,7 @@ set lazyredraw
 "-------------------显示相关---------------------------------------
 set cul "高亮光标所在行
 set cuc
-color monokain     " 设置背景主题
+" color monokain     " 设置背景主题
 set ruler           " 显示标尺
 set showcmd         " 输入的命令显示出来，看的清楚些
 set scrolloff=2     " 光标移动到buffer的顶部和底部时保持3行距离
@@ -309,6 +330,7 @@ set expandtab
 set smarttab
 " 显示行号
 set number
+set relativenumber
 set showmode
 
 " 历史记录数
@@ -332,12 +354,12 @@ filetype plugin on
 
 
 "tab, buffer快捷键配置----------------------------------------------------------------------------
-map <S-H> :tabp<CR>
-map <S-L> :tabn<CR>
+map <S-w><S-h> :tabp<CR>
+map <S-w><S-l> :tabn<CR>
 map <S-Left> :tabp<CR>
 map <S-Right> :tabn<CR>
-map <C-H> :bn<CR>            "下一个缓冲区
-map <C-L> :bp<CR>        "上一个缓冲区
+map <C-w><C-l> :bn<CR>            "下一个缓冲区
+map <C-w><C-h> :bp<CR>        "上一个缓冲区
 map <C-Left> :bn<CR>            "下一个缓冲区
 map <C-Right> :bp<CR>        "上一个缓冲区
 
