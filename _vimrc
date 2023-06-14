@@ -5,6 +5,8 @@ behave mswin
 " 详见https://github.com/rime/weasel/issues/232
 set iminsert=2
 
+set nocp
+
 "if has("gui_running")
 "    au GUIEnter * simalt ~x " 窗口启动时自动最大化
 "    set guioptions-=m " 隐藏菜单栏
@@ -250,8 +252,8 @@ omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
 " Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+"nmap <silent> <TAB> <Plug>(coc-range-select)
+"xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -348,6 +350,7 @@ set viminfo+=!
 set iskeyword+=$,@,%,#,-,_
 
 set guifont=CodeNewRoman_Nerd_Font_Mono:h13
+" set guifont=SauceCodePro_Nerd_Font_Mono:h12
 set guifontwide="微软雅黑":h12
 
 filetype plugin on
@@ -362,6 +365,8 @@ map <C-w><C-l> :bn<CR>            "下一个缓冲区
 map <C-w><C-h> :bp<CR>        "上一个缓冲区
 map <C-Left> :bn<CR>            "下一个缓冲区
 map <C-Right> :bp<CR>        "上一个缓冲区
+command! -nargs=* -complete=file E :tabe <args>
+
 
 "代码格式化---------------------------------------------------------------------------------------
 noremap <F12> :syntax sync fromstart<CR>:Format<CR>
@@ -455,7 +460,9 @@ set smartcase
 set linespace=0
 "set spell spelllang=en_us
 " 使回格键（backspace）正常处理indent, eol, start等
-set backspace=2
+" set backspace=2
+set backspace=indent,eol,start
+
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
 set mouse=a
 set selection=exclusive
@@ -478,8 +485,8 @@ set encoding=UTF-8
 set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
 
 "在插入模式中使用Ctrl+v粘贴全局剪贴板内容
-imap <C-V> <Esc>"+gp
-nmap <C-V> "+gp
+"imap <C-V> <Esc>"+gp
+"nmap <C-V> "+gp
 
 "在Visual模式中使用Ctrl+c复制内容到全局剪贴板
 vnoremap <C-c> "+y
